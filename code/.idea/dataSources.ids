@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="Sqlite (Xerial) - data-dev.sqlite" uuid="8169fc85-7ce7-4aaf-8aef-cb823bdafe88">
+    <database-info product="SQLite" version="3.8.11" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
+    <schema name="" catalog=""/>
+    <table name="alembic_version" schema="" catalog="" type="TABLE">
+      <column name="version_num" sqlType="VARCHAR(32)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
+    </table>
+    <table name="comments" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="post_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="author_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="agree_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="disagree_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="body" sqlType="TEXT" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <primary-key columns="id),foreign key(author_id"/>
+      <foreign-key name="#FAKE_comments_1" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_comments_2" columns="author_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="ix_comments_post_id" unique="true" columns="post_id"/>
+      <index name="ix_comments_id" unique="true" columns="id"/>
+      <index name="ix_comments_author_id" unique="true" columns="author_id"/>
+    </table>
+    <table name="concern_posts" schema="" catalog="" type="TABLE">
+      <column name="user_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="post_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <primary-key columns="user_id,post_id"/>
+      <foreign-key name="#FAKE_concern_posts_1" columns="user_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_concern_posts_2" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="ix_concern_posts_user_id" unique="true" columns="user_id"/>
+      <index name="ix_concern_posts_post_id" unique="true" columns="post_id"/>
+    </table>
+    <table name="follows" schema="" catalog="" type="TABLE">
+      <column name="follower_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="followed_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <primary-key columns="follower_id,followed_id"/>
+      <foreign-key name="#FAKE_follows_1" columns="follower_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_follows_2" columns="followed_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="ix_follows_follower_id" unique="true" columns="follower_id"/>
+      <index name="ix_follows_followed_id" unique="true" columns="followed_id"/>
+    </table>
+    <table name="posts" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="body" sqlType="TEXT" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="author_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="viewed_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="tags_txt" sqlType="VARCHAR(128)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="agree_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="disagree_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="title" sqlType="VARCHAR(128)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <primary-key columns="id),foreign key(author_id"/>
+      <foreign-key name="#FAKE_posts_1" columns="author_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="ix_posts_timestamp" unique="true" columns="timestamp"/>
+      <index name="ix_posts_id" unique="true" columns="id"/>
+      <index name="ix_posts_author_id" unique="true" columns="author_id"/>
+    </table>
+    <table name="posttags" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="post_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="tag_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <primary-key columns="id),foreign key(post_id"/>
+      <foreign-key name="#FAKE_posttags_1" columns="tag_id" ref-table="tags" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_posttags_2" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="ix_posttags_tag_id" unique="true" columns="tag_id"/>
+      <index name="ix_posttags_post_id" unique="true" columns="post_id"/>
+      <index name="ix_posttags_id" unique="true" columns="id"/>
+    </table>
+    <table name="remarkposts" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="owner_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="post_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="attitude" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <primary-key columns="id),foreign key(owner_id"/>
+      <foreign-key name="#FAKE_remarkposts_1" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_remarkposts_2" columns="owner_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="ix_remarkposts_post_id" unique="true" columns="post_id"/>
+      <index name="ix_remarkposts_owner_id" unique="true" columns="owner_id"/>
+    </table>
+    <table name="remarks" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="owner_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="comment_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="attitude" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <primary-key columns="id),foreign key(comment_id"/>
+      <foreign-key name="#FAKE_remarks_1" columns="owner_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_remarks_2" columns="comment_id" ref-table="comments" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="ix_remarks_owner_id" unique="true" columns="owner_id"/>
+      <index name="ix_remarks_comment_id" unique="true" columns="comment_id"/>
+    </table>
+    <table name="roles" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="default" sqlType="BOOLEAN" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="permission" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <primary-key columns="id),check (&quot;default&quot; in (0,1"/>
+      <index name="ix_roles_name" unique="true" columns="name"/>
+      <index name="ix_roles_id" unique="true" columns="id"/>
+      <index name="ix_roles_default" unique="true" columns="default"/>
+    </table>
+    <table name="subcomment" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="for_comment_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="from_comment_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <primary-key columns="id),foreign key(for_comment_id"/>
+      <foreign-key name="#FAKE_subcomment_1" columns="from_comment_id" ref-table="comments" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_subcomment_2" columns="for_comment_id" ref-table="comments" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="ix_subcomment_id" unique="true" columns="id"/>
+      <index name="ix_subcomment_from_comment_id" unique="true" columns="from_comment_id"/>
+      <index name="ix_subcomment_for_comment_id" unique="true" columns="for_comment_id"/>
+    </table>
+    <table name="tags" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="content" sqlType="VARCHAR(10)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="refer_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <index name="ix_tags_id" unique="true" columns="id"/>
+    </table>
+    <table name="users" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
+      <column name="email" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="username" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="location" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="about_me" sqlType="TEXT" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="member_since" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="last_seen" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="role_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="password_hash" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <column name="confirmed" sqlType="BOOLEAN" precision="0" scale="-1" nullable="true" jdbcType="4"/>
+      <column name="avatar_url" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
+      <primary-key columns="id),foreign key(role_id"/>
+      <foreign-key name="#FAKE_users_1" columns="role_id" ref-table="roles" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="ix_users_username" unique="true" columns="username"/>
+      <index name="ix_users_email" unique="true" columns="email"/>
+      <index name="ix_users_avatar_url" unique="true" columns="avatar_url"/>
+    </table>
+  </data-source>
+</component>
