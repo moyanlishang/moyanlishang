@@ -4,7 +4,7 @@ index page.
 '''
 __all__ = []
 __version__ = '0.0.1'
-__author__ = 'GalaIO'
+__author__ = 'Bevis'
 
 from flask import Blueprint
 import app
