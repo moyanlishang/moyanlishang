@@ -45,20 +45,20 @@ python manage.py db upgrade
 
 $python manage.py shell
 
-	Role.insert_roles()
-	Role.query.all()
+	>>> Role.insert_roles()
+	>>> Role.query.all()
 	[<Role u'Moderator'>, <Role u'Administrator'>, <Role u'User'>]
-	
+	>>> 
 
 建立一个初始的超级管理员，步骤如下：
 
 $python manage.py shell
 
-	u = User(username='Bevis', email='*****@**.com', role=Role.query.filter_by(name='Administrator').first(), password='***')
+	>>> u = User(username='Bevis', email='*****@**.com', role=Role.query.filter_by(name='Administrator').first(), password='***')
 
-	u.generate_avatar_url()
+	>>> u.generate_avatar_url()
 
-	u
+	>>> u
 	<User 'Bevis'>
 
 	>>> db.session.add(u)
