@@ -62,6 +62,7 @@ $python manage.py shell
 <User 'Bevis'>
 
 >>> db.session.add(u)
+
 >>> db.session.commit()
 现在你只需要完成邮件验证就好了，也可以通过后台数据库操作。
 
