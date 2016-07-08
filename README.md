@@ -45,28 +45,28 @@ python manage.py db upgrade
 
 $python manage.py shell
 
- >>> Role.insert_roles()
- >>> Role.query.all()
- [<Role u'Moderator'>, <Role u'Administrator'>, <Role u'User'>]
- >>>
+Role.insert_roles()
+Role.query.all()
+[<Role u'Moderator'>, <Role u'Administrator'>, <Role u'User'>]
+
 
 建立一个初始的超级管理员，步骤如下：
 
 $python manage.py shell
 
- >>> u = User(username='Bevis', email='*****@**.com', role=Role.query.filter_by(name='Administrator').first(),  password='***')
- >>> u.generate_avatar_url()
- >>> u
+u = User(username='Bevis', email='*****@**.com', role=Role.query.filter_by(name='Administrator').first(),  password='***')
+u.generate_avatar_url()
+u
  <User 'Bevis'>
- >>> db.session.add(u)
- >>> db.session.commit()
+ db.session.add(u)
+ db.session.commit()
 现在你只需要完成邮件验证就好了，也可以通过后台数据库操作。
 
 此博客实现了匿名评论功能，你需要主动的添加一个匿名用户，如果没有设置，系统会报异常来提示。
 
 $python manage.py shell
 
- >>> User.insert_Anonymous()
+User.insert_Anonymous()
 
 4.运行服务器
 
@@ -79,7 +79,7 @@ $python manage.py runserver
 
 $python manage.py shell
 
- >>> app
+>>>app
 
  <Flask 'app'>
 
