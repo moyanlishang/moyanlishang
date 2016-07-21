@@ -80,6 +80,11 @@ def config():
     }
 }''' % (Config.HOST, os.path.join(os.path.join(root_dir, 'logs'), 'nginx.log'), os.path.join(os.path.join(root_dir, 'logs'), 'nginx.err'), Config.PORT, os.path.join(root_dir, 'app'))
 
+
+    '''
+    如果需要在uwsgi中使用多线程必须，添加下面两个字段，
+    一个是threads 一个是enable-threads否则不能运行，为了提高性能肯定是越多进程越多线程的好。
+    '''
     uwsgi_conf =\
 '''<uwsgi>
     <pythonpath>%s</pythonpath>
@@ -88,11 +93,13 @@ def config():
     <socket>%s:%d</socket>
     <master/>
     <processes>%d</processes>
+    <threads>%d</threads>
+    <enable-threads/>
     <memory-report/>
     <daemonize>logs/uwsgi.log</daemonize>
     <buffer-size>16384</buffer-size>
     <pidfile>pids/uwsgi.pid</pidfile>
-</uwsgi>'''% (root_dir, Config.ACCESSIPS, Config.PORT, 4)
+</uwsgi>'''% (root_dir, Config.ACCESSIPS, Config.PORT, 4, 4)
     print 'output nginx config file.....'
     file = open(Config.HOST+'-nginx.conf', 'w')
     file.truncate()
