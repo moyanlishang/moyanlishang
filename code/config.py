@@ -26,12 +26,12 @@ class Config:
 
     # 服务器绑定二级域名 端口 和过滤IP地址设置
     HOST = os.environ.get('WEBSERVER_HOST')
-    PORT = int(os.environ.get('WEBSERVER_PORT'))
+    PORT = os.environ.get('WEBSERVER_PORT')
     ACCESSIPS = os.environ.get('WEBSERVER_ACCESSIP')
 
     # 注册发送邮件服务器
     MAIL_SERVER = os.environ.get('MAIL_SERVER')
-    MAIL_PORT = int(os.environ.get('MAIL_SERVERPORT'))
+    MAIL_PORT = os.environ.get('MAIL_SERVERPORT')
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
