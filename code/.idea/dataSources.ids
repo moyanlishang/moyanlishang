@@ -3,142 +3,528 @@
   <data-source name="Sqlite (Xerial) - data-dev.sqlite" uuid="8169fc85-7ce7-4aaf-8aef-cb823bdafe88">
     <database-info product="SQLite" version="3.8.11" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native"/>
     <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed"/>
-    <schema name="" catalog=""/>
-    <table name="alembic_version" schema="" catalog="" type="TABLE">
-      <column name="version_num" sqlType="VARCHAR(32)" precision="0" scale="-1" nullable="false" jdbcType="12"/>
-    </table>
-    <table name="comments" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="post_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="author_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="agree_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="disagree_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="body" sqlType="TEXT" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <primary-key columns="id),foreign key(author_id"/>
-      <foreign-key name="#FAKE_comments_1" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_comments_2" columns="author_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="ix_comments_post_id" unique="true" columns="post_id"/>
-      <index name="ix_comments_id" unique="true" columns="id"/>
-      <index name="ix_comments_author_id" unique="true" columns="author_id"/>
-    </table>
-    <table name="concern_posts" schema="" catalog="" type="TABLE">
-      <column name="user_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="post_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <primary-key columns="user_id,post_id"/>
-      <foreign-key name="#FAKE_concern_posts_1" columns="user_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_concern_posts_2" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="ix_concern_posts_user_id" unique="true" columns="user_id"/>
-      <index name="ix_concern_posts_post_id" unique="true" columns="post_id"/>
-    </table>
-    <table name="follows" schema="" catalog="" type="TABLE">
-      <column name="follower_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="followed_id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <primary-key columns="follower_id,followed_id"/>
-      <foreign-key name="#FAKE_follows_1" columns="follower_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_follows_2" columns="followed_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="ix_follows_follower_id" unique="true" columns="follower_id"/>
-      <index name="ix_follows_followed_id" unique="true" columns="followed_id"/>
-    </table>
-    <table name="posts" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="body" sqlType="TEXT" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="author_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="viewed_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="tags_txt" sqlType="VARCHAR(128)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="agree_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="disagree_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="title" sqlType="VARCHAR(128)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <primary-key columns="id),foreign key(author_id"/>
-      <foreign-key name="#FAKE_posts_1" columns="author_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="ix_posts_timestamp" unique="true" columns="timestamp"/>
-      <index name="ix_posts_id" unique="true" columns="id"/>
-      <index name="ix_posts_author_id" unique="true" columns="author_id"/>
-    </table>
-    <table name="posttags" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="post_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="tag_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <primary-key columns="id),foreign key(post_id"/>
-      <foreign-key name="#FAKE_posttags_1" columns="tag_id" ref-table="tags" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_posttags_2" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="ix_posttags_tag_id" unique="true" columns="tag_id"/>
-      <index name="ix_posttags_post_id" unique="true" columns="post_id"/>
-      <index name="ix_posttags_id" unique="true" columns="id"/>
-    </table>
-    <table name="remarkposts" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="owner_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="post_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="attitude" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <primary-key columns="id),foreign key(owner_id"/>
-      <foreign-key name="#FAKE_remarkposts_1" columns="post_id" ref-table="posts" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_remarkposts_2" columns="owner_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="ix_remarkposts_post_id" unique="true" columns="post_id"/>
-      <index name="ix_remarkposts_owner_id" unique="true" columns="owner_id"/>
-    </table>
-    <table name="remarks" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="owner_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="comment_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="attitude" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="timestamp" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <primary-key columns="id),foreign key(comment_id"/>
-      <foreign-key name="#FAKE_remarks_1" columns="owner_id" ref-table="users" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_remarks_2" columns="comment_id" ref-table="comments" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="ix_remarks_owner_id" unique="true" columns="owner_id"/>
-      <index name="ix_remarks_comment_id" unique="true" columns="comment_id"/>
-    </table>
-    <table name="roles" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="name" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="default" sqlType="BOOLEAN" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="permission" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <primary-key columns="id),check (&quot;default&quot; in (0,1"/>
-      <index name="ix_roles_name" unique="true" columns="name"/>
-      <index name="ix_roles_id" unique="true" columns="id"/>
-      <index name="ix_roles_default" unique="true" columns="default"/>
-    </table>
-    <table name="subcomment" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="for_comment_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="from_comment_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <primary-key columns="id),foreign key(for_comment_id"/>
-      <foreign-key name="#FAKE_subcomment_1" columns="from_comment_id" ref-table="comments" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_subcomment_2" columns="for_comment_id" ref-table="comments" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="ix_subcomment_id" unique="true" columns="id"/>
-      <index name="ix_subcomment_from_comment_id" unique="true" columns="from_comment_id"/>
-      <index name="ix_subcomment_for_comment_id" unique="true" columns="for_comment_id"/>
-    </table>
-    <table name="tags" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="content" sqlType="VARCHAR(10)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="refer_count" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <primary-key columns="id"/>
-      <index name="ix_tags_id" unique="true" columns="id"/>
-    </table>
-    <table name="users" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="0" scale="-1" nullable="false" jdbcType="4"/>
-      <column name="email" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="username" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="name" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="location" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="about_me" sqlType="TEXT" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="member_since" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="last_seen" sqlType="DATETIME" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="role_id" sqlType="INTEGER" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="password_hash" sqlType="VARCHAR(64)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <column name="confirmed" sqlType="BOOLEAN" precision="0" scale="-1" nullable="true" jdbcType="4"/>
-      <column name="avatar_url" sqlType="VARCHAR(100)" precision="0" scale="-1" nullable="true" jdbcType="12"/>
-      <primary-key columns="id),foreign key(role_id"/>
-      <foreign-key name="#FAKE_users_1" columns="role_id" ref-table="roles" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="ix_users_username" unique="true" columns="username"/>
-      <index name="ix_users_email" unique="true" columns="email"/>
-      <index name="ix_users_avatar_url" unique="true" columns="avatar_url"/>
-    </table>
+    <database-model serializer="dbm" rdbms="SQLITE" format-version="2.6">
+      <schema id="1">
+        <visible>1</visible>
+      </schema>
+      <table id="2" parent="1" name="alembic_version"/>
+      <table id="3" parent="1" name="comments"/>
+      <table id="4" parent="1" name="concern_posts"/>
+      <table id="5" parent="1" name="follows"/>
+      <table id="6" parent="1" name="posts"/>
+      <table id="7" parent="1" name="posttags"/>
+      <table id="8" parent="1" name="remarkposts"/>
+      <table id="9" parent="1" name="remarks"/>
+      <table id="10" parent="1" name="roles"/>
+      <table id="11" parent="1" name="subcomment"/>
+      <table id="12" parent="1" name="tags"/>
+      <table id="13" parent="1" name="users"/>
+      <column id="14" parent="2" name="version_num">
+        <mandatory>1</mandatory>
+        <data-type>VARCHAR(32) (0,-1)|12</data-type>
+      </column>
+      <column id="15" parent="3" name="id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="16" parent="3" name="post_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="17" parent="3" name="author_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="18" parent="3" name="timestamp">
+        <data-type>DATETIME(0,-1)|12</data-type>
+      </column>
+      <column id="19" parent="3" name="agree_count">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="20" parent="3" name="disagree_count">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="21" parent="3" name="body">
+        <data-type>TEXT(0,-1)|12</data-type>
+      </column>
+      <index id="22" parent="3" name="ix_comments_post_id">
+        <columns>post_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="23" parent="3" name="ix_comments_id">
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="24" parent="3" name="ix_comments_author_id">
+        <columns>author_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="25" parent="3">
+        <columns>id)
+foreign key(author_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="26" parent="3" name="#FAKE_comments_1">
+        <columns>post_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>posts(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="27" parent="3" name="#FAKE_comments_2">
+        <columns>author_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>users(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <column id="28" parent="4" name="user_id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="29" parent="4" name="post_id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="30" parent="4" name="timestamp">
+        <data-type>DATETIME(0,-1)|12</data-type>
+      </column>
+      <index id="31" parent="4" name="ix_concern_posts_user_id">
+        <columns>user_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="32" parent="4" name="ix_concern_posts_post_id">
+        <columns>post_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="33" parent="4">
+        <columns>user_id
+post_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="34" parent="4" name="#FAKE_concern_posts_1">
+        <columns>user_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>users(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="35" parent="4" name="#FAKE_concern_posts_2">
+        <columns>post_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>posts(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <column id="36" parent="5" name="follower_id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="37" parent="5" name="followed_id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="38" parent="5" name="timestamp">
+        <data-type>DATETIME(0,-1)|12</data-type>
+      </column>
+      <index id="39" parent="5" name="ix_follows_follower_id">
+        <columns>follower_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="40" parent="5" name="ix_follows_followed_id">
+        <columns>followed_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="41" parent="5">
+        <columns>follower_id
+followed_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="42" parent="5" name="#FAKE_follows_1">
+        <columns>follower_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>users(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="43" parent="5" name="#FAKE_follows_2">
+        <columns>followed_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>users(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <column id="44" parent="6" name="id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="45" parent="6" name="body">
+        <data-type>TEXT(0,-1)|12</data-type>
+      </column>
+      <column id="46" parent="6" name="timestamp">
+        <data-type>DATETIME(0,-1)|12</data-type>
+      </column>
+      <column id="47" parent="6" name="author_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="48" parent="6" name="viewed_count">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="49" parent="6" name="tags_txt">
+        <data-type>VARCHAR(128) (0,-1)|12</data-type>
+      </column>
+      <column id="50" parent="6" name="agree_count">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="51" parent="6" name="disagree_count">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="52" parent="6" name="title">
+        <data-type>VARCHAR(128) (0,-1)|12</data-type>
+      </column>
+      <index id="53" parent="6" name="ix_posts_timestamp">
+        <columns>timestamp</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="54" parent="6" name="ix_posts_id">
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="55" parent="6" name="ix_posts_author_id">
+        <columns>author_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="56" parent="6">
+        <columns>id)
+foreign key(author_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="57" parent="6" name="#FAKE_posts_1">
+        <columns>author_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>users(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <column id="58" parent="7" name="id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="59" parent="7" name="post_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="60" parent="7" name="tag_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <index id="61" parent="7" name="ix_posttags_tag_id">
+        <columns>tag_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="62" parent="7" name="ix_posttags_post_id">
+        <columns>post_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="63" parent="7" name="ix_posttags_id">
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="64" parent="7">
+        <columns>id)
+foreign key(post_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="65" parent="7" name="#FAKE_posttags_1">
+        <columns>tag_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>~.tags.#1</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="66" parent="7" name="#FAKE_posttags_2">
+        <columns>post_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>posts(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <column id="67" parent="8" name="id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="68" parent="8" name="owner_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="69" parent="8" name="post_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="70" parent="8" name="attitude">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="71" parent="8" name="timestamp">
+        <data-type>DATETIME(0,-1)|12</data-type>
+      </column>
+      <index id="72" parent="8" name="ix_remarkposts_post_id">
+        <columns>post_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="73" parent="8" name="ix_remarkposts_owner_id">
+        <columns>owner_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="74" parent="8">
+        <columns>id)
+foreign key(owner_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="75" parent="8" name="#FAKE_remarkposts_1">
+        <columns>post_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>posts(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="76" parent="8" name="#FAKE_remarkposts_2">
+        <columns>owner_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>users(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <column id="77" parent="9" name="id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="78" parent="9" name="owner_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="79" parent="9" name="comment_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="80" parent="9" name="attitude">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="81" parent="9" name="timestamp">
+        <data-type>DATETIME(0,-1)|12</data-type>
+      </column>
+      <index id="82" parent="9" name="ix_remarks_owner_id">
+        <columns>owner_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="83" parent="9" name="ix_remarks_comment_id">
+        <columns>comment_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="84" parent="9">
+        <columns>id)
+foreign key(comment_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="85" parent="9" name="#FAKE_remarks_1">
+        <columns>owner_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>users(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="86" parent="9" name="#FAKE_remarks_2">
+        <columns>comment_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>comments(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <column id="87" parent="10" name="id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="88" parent="10" name="name">
+        <data-type>VARCHAR(64) (0,-1)|12</data-type>
+      </column>
+      <column id="89" parent="10" name="default">
+        <data-type>BOOLEAN(0,-1)|4</data-type>
+      </column>
+      <column id="90" parent="10" name="permission">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <index id="91" parent="10" name="ix_roles_name">
+        <columns>name</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="92" parent="10" name="ix_roles_id">
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="93" parent="10" name="ix_roles_default">
+        <columns>default</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="94" parent="10">
+        <columns>id)
+check (&quot;default&quot; in (0
+1</columns>
+        <primary>1</primary>
+      </key>
+      <column id="95" parent="11" name="id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="96" parent="11" name="for_comment_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="97" parent="11" name="from_comment_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <index id="98" parent="11" name="ix_subcomment_id">
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="99" parent="11" name="ix_subcomment_from_comment_id">
+        <columns>from_comment_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="100" parent="11" name="ix_subcomment_for_comment_id">
+        <columns>for_comment_id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="101" parent="11">
+        <columns>id)
+foreign key(for_comment_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="102" parent="11" name="#FAKE_subcomment_1">
+        <columns>from_comment_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>comments(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="103" parent="11" name="#FAKE_subcomment_2">
+        <columns>for_comment_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>comments(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+      <column id="104" parent="12" name="id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="105" parent="12" name="content">
+        <data-type>VARCHAR(10) (0,-1)|12</data-type>
+      </column>
+      <column id="106" parent="12" name="refer_count">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <index id="107" parent="12" name="ix_tags_id">
+        <columns>id</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="108" parent="12">
+        <columns>id</columns>
+        <primary>1</primary>
+      </key>
+      <column id="109" parent="13" name="id">
+        <mandatory>1</mandatory>
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="110" parent="13" name="email">
+        <data-type>VARCHAR(64) (0,-1)|12</data-type>
+      </column>
+      <column id="111" parent="13" name="username">
+        <data-type>VARCHAR(64) (0,-1)|12</data-type>
+      </column>
+      <column id="112" parent="13" name="name">
+        <data-type>VARCHAR(64) (0,-1)|12</data-type>
+      </column>
+      <column id="113" parent="13" name="location">
+        <data-type>VARCHAR(64) (0,-1)|12</data-type>
+      </column>
+      <column id="114" parent="13" name="about_me">
+        <data-type>TEXT(0,-1)|12</data-type>
+      </column>
+      <column id="115" parent="13" name="member_since">
+        <data-type>DATETIME(0,-1)|12</data-type>
+      </column>
+      <column id="116" parent="13" name="last_seen">
+        <data-type>DATETIME(0,-1)|12</data-type>
+      </column>
+      <column id="117" parent="13" name="role_id">
+        <data-type>INTEGER(0,-1)|4</data-type>
+      </column>
+      <column id="118" parent="13" name="password_hash">
+        <data-type>VARCHAR(64) (0,-1)|12</data-type>
+      </column>
+      <column id="119" parent="13" name="confirmed">
+        <data-type>BOOLEAN(0,-1)|4</data-type>
+      </column>
+      <column id="120" parent="13" name="avatar_url">
+        <data-type>VARCHAR(100) (0,-1)|12</data-type>
+      </column>
+      <index id="121" parent="13" name="ix_users_username">
+        <columns>username</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="122" parent="13" name="ix_users_email">
+        <columns>email</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <index id="123" parent="13" name="ix_users_avatar_url">
+        <columns>avatar_url</columns>
+        <desc-columns></desc-columns>
+        <unique>1</unique>
+      </index>
+      <key id="124" parent="13">
+        <columns>id)
+foreign key(role_id</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="125" parent="13" name="#FAKE_users_1">
+        <columns>role_id</columns>
+        <deferrable>1</deferrable>
+        <initially-deferred>1</initially-deferred>
+        <ref-key>roles(id)</ref-key>
+        <cascade-update-rule>no_action</cascade-update-rule>
+        <cascade-delete-rule>no_action</cascade-delete-rule>
+      </foreign-key>
+    </database-model>
   </data-source>
 </component>
